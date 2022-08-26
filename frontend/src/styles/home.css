@@ -75,3 +75,22 @@
 .search-bar button:hover {
     opacity: .75;
 }
+
+.home .search-list li {
+    list-style-type: none;
+    margin: 5px 0;
+    cursor: pointer;
+    width: fit-content;
+    padding: 5px 10px;
+}
+
+.home .search-list li:hover {
+    background: var(--main);
+    color: white;
+}
+
+/* Display Spell */
+.home .spell-container {
+    display: flex;
+    column-gap: 50px;
+}

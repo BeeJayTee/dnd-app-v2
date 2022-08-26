@@ -1,4 +1,4 @@
-const SearchList = ({categoryItems, searchQuery}) => {
+const SearchList = ({categoryItems, setSearchQuery, searchQuery, handleSubmit}) => {
     let matchingCategoryItems
 
     if (searchQuery.length > 0) {
@@ -7,10 +7,15 @@ const SearchList = ({categoryItems, searchQuery}) => {
         })
     }
 
+    const handleClick = (e) => {
+        handleSubmit(e, e.target.getAttribute('value'))
+        setSearchQuery('')
+    }
+
     return (
         <ul className="search-list">
             {matchingCategoryItems && matchingCategoryItems.slice(0,5).map((item, index) => (
-                    <li key={index}>{item.index}</li>
+                    <li key={index} onClick={handleClick} value={item.index}>{item.index}</li>
             ))}
         </ul>
     )
