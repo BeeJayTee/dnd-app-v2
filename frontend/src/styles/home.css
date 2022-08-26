@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --main: rgb(45, 38, 92);
+    --dark-gray: rgb(66, 65, 74);
+}
+
+.home {
+    padding: 100px 200px 0 200px;
+    background: rgba(255, 124, 124, .05);
+    font-family: 'Rubik', sans-serif;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.home h1 {
+    color: var(--dark-gray)
+}
+
+.home .main {
+    display: flex;
+}
+
+.home .search {
+    flex-basis: 40%;
+}
+
+.home .query-list {
+    display: flex;
+    column-gap: 25px;
+    border: 1px solid black;
+    padding: 10px;
+    width: fit-content;
+    border-radius: 4px;
+}
+
+.home .query-list-item {
+    list-style-type: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.home .query-list-item:hover {
+    border: 1px solid var(--main);
+    color: var(--main);
+}
+
+.home .active {
+    border: 1px solid var(--main);
+    color: var(--main);
+    cursor: default;
+}
+
+.search-bar input {
+    padding: 6px 9px;
+    border: none;
+    border-bottom: 1px solid var(--main);
+    background: none;
+    outline: none;
+    margin-right: 15px;
+    font-size: 1.25rem;
+}
+
+.search-bar button {
+    padding: 12px 24px;
+    border: none;
+    background: var(--main);
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.search-bar button:hover {
+    opacity: .75;
+}
