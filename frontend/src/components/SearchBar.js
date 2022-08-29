@@ -19,6 +19,7 @@ const SearchBar = ({setSearchResult}) => {
             const response = await fetch('https://www.dnd5eapi.co/api/' + category)
             const data = await response.json()
             setCategoryItems(data.results)
+            console.log(data)
         }
         getCategoryItems()
     }, [category])
@@ -49,7 +50,7 @@ const SearchBar = ({setSearchResult}) => {
 
     return (
         <div className="search-bar">
-            <QueryList setCategory={setCategory} category={category}/>
+            <QueryList setCategory={setCategory}/>
             {error && <span>{error}</span>}
             <form onSubmit={handleSubmit}>
                 <input

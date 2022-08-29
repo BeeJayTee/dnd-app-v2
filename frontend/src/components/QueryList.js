@@ -1,4 +1,4 @@
-const QueryList = ({setCategory, category}) => {
+const QueryList = ({setCategory}) => {
 
     const handleClick = async (e) => {
         setCategory(e.target.innerText)
@@ -21,6 +21,9 @@ const QueryList = ({setCategory, category}) => {
             </li>
             <li className="query-list-item" onClick={handleClick}>
                 classes
+            </li>
+            <li className="query-list-item" onClick={handleClick}>
+                races
             </li>
             <li className="query-list-item" onClick={handleClick}>
                 monsters

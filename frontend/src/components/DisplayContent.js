@@ -2,6 +2,7 @@
 import DisplayClass from "./displays/DisplayClass"
 import DisplayMonster from "./displays/DisplayMonster"
 import DisplaySpell from "./displays/DisplaySpell"
+import DisplayRace from "./displays/DisplayRace"
 
 const DisplayContent = ({searchResult}) => {
     const {category, data} = searchResult
@@ -11,6 +12,8 @@ const DisplayContent = ({searchResult}) => {
             return <DisplaySpell data={data}/>
         case 'classes':
             return <DisplayClass data={data}/>
+        case 'races':
+            return <DisplayRace data={data}/>
         case 'monsters':
             return <DisplayMonster data={data}/>
         default:

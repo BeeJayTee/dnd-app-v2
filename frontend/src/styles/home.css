@@ -3,10 +3,11 @@
 :root {
     --main: rgb(45, 38, 92);
     --dark-gray: rgb(66, 65, 74);
+    --light-gray: rgb(228, 227, 238);
 }
 
 .home {
-    padding: 100px 200px 0 200px;
+    padding: 100px 0 0 0;
     background: rgba(255, 124, 124, .05);
     font-family: 'Rubik', sans-serif;
     height: 100vh;
@@ -19,18 +20,21 @@
 
 .home .main {
     display: flex;
+    justify-content: center;
+    column-gap: 100px;
 }
 
-.home .search {
-    flex-basis: 40%;
+.search, .content-box {
+    width: 500px;
 }
 
 .home .query-list {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
     column-gap: 25px;
     border: 1px solid black;
     padding: 10px;
-    width: fit-content;
     border-radius: 4px;
 }
 
@@ -76,7 +80,7 @@
     opacity: .75;
 }
 
-.home .search-list li {
+.search-list li {
     list-style-type: none;
     margin: 5px 0;
     cursor: pointer;
@@ -84,13 +88,37 @@
     padding: 5px 10px;
 }
 
-.home .search-list li:hover {
+.search-list li:hover {
     background: var(--main);
     color: white;
 }
 
 /* Display Spell */
-.home .spell-container {
+.spell-container {
     display: flex;
     column-gap: 50px;
+}
+
+.spell-container span {
+    font-weight: 600;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.spell-damage {
+    padding-left: 15px;
+}
+
+.spell-damage .dark {
+    background: var(--light-gray);
+}
+
+.spell-damage table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    border-spacing: 10px;
+}
+
+.home .spell-damage td {
+    padding: 5px 10px;
 }
