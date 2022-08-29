@@ -5,17 +5,17 @@ const DisplaySpell = ({data}) => {
             {data.level ? <p>Level {data.level} spell</p> : null}
             <div className="spell-container">
                 <div className="spell-column-1">
-                    {data.range ? <p><span>Range:</span> {data.range}</p> : null}
-                    {data.casting_time ? <p><span>Casting Time:</span> {data.casting_time}</p> : null}
-                    {data.area_of_effect ? <p><span>Area of Effect:</span> {data.area_of_effect.type} {data.area_of_effect.size} feet</p> : null}
-                    {data.attack_type ? <p><span>Attack Type:</span> {data.attack_type}</p> : null}
-                    {data.concentration ? <p><span>Concentration:</span> {data.concentration ? 'yes' : 'no'}</p> : null}
-                    {data.ritual ? <p><span>Ritual:</span> {data.ritual ? 'yes' : 'no'}</p> : null}
-                    {data.duration ? <p><span>Duration:</span> {data.duration}</p> : null}
-                    {data.damage ? <p><span>Damage Type:</span> {data.damage.damage_type.name}</p> : null}
+                    {data.range && <p><span>Range:</span> {data.range}</p>}
+                    {data.casting_time && <p><span>Casting Time:</span> {data.casting_time}</p>}
+                    {data.area_of_effect && <p><span>Area of Effect:</span> {data.area_of_effect.type} {data.area_of_effect.size} feet</p>}
+                    {data.attack_type && <p><span>Attack Type:</span> {data.attack_type}</p>}
+                    {data.concentration && <p><span>Concentration:</span> {data.concentration ? 'yes' : 'no'}</p>}
+                    {data.ritual && <p><span>Ritual:</span> {data.ritual ? 'yes' : 'no'}</p>}
+                    {data.duration && <p><span>Duration:</span> {data.duration}</p>}
+                    {data.damage && <p><span>Damage Type:</span> {data.damage.damage_type.name}</p>}
                     
                 </div>
-                {!data.damage ? null : (
+                {data.damage && (
                     <div className="spell-column-two">
                     <p><span>Damage:</span></p>
                     <ul className="spell-damage">

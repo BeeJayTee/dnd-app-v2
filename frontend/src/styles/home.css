@@ -88,9 +88,13 @@
     padding: 5px 10px;
 }
 
-.search-list li:hover {
+.search-list a:hover, .search-list a:focus {
     background: var(--main);
     color: white;
+}
+
+.search-list .focus {
+    background: blue;
 }
 
 /* Display Spell */
