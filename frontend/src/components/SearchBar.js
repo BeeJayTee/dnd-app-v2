@@ -112,11 +112,6 @@ const SearchBar = ({setSearchResult}) => {
                         value={search}
                         ref={focus}
                     />
-                <div className='icon-container'>
-                    <div className='icon'><span className="material-symbols-outlined">keyboard_arrow_up</span><span>Go Up</span></div>
-                    <div className='icon'><span className="material-symbols-outlined">keyboard_arrow_down</span><span>Go Down</span></div>
-                    <div className='icon'><span className="material-symbols-outlined">login</span><span>Enter</span></div>
-                </div>
             </div>
             <ul className="search-list">
             {matchingCategoryItems && matchingCategoryItems.slice(0,5).map((item, index) => (
