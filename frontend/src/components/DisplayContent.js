@@ -1,8 +1,6 @@
 // display components
-import DisplayClass from "./displays/DisplayClass"
-import DisplayMonster from "./displays/DisplayMonster"
+import DisplayEquipment from "./displays/DisplayEquipment"
 import DisplaySpell from "./displays/DisplaySpell"
-import DisplayRace from "./displays/DisplayRace"
 
 const DisplayContent = ({searchResult}) => {
     const {category, data} = searchResult
@@ -10,12 +8,8 @@ const DisplayContent = ({searchResult}) => {
     switch (category) {
         case 'spells':
             return <DisplaySpell data={data}/>
-        case 'classes':
-            return <DisplayClass data={data}/>
-        case 'races':
-            return <DisplayRace data={data}/>
-        case 'monsters':
-            return <DisplayMonster data={data}/>
+        case 'equipment':
+            return <DisplayEquipment data={data}/>
         default:
             return null
     }

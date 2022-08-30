@@ -20,13 +20,7 @@ const QueryList = ({setCategory}) => {
                 spells
             </li>
             <li className="query-list-item" onClick={handleClick}>
-                classes
-            </li>
-            <li className="query-list-item" onClick={handleClick}>
-                races
-            </li>
-            <li className="query-list-item" onClick={handleClick}>
-                monsters
+                equipment
             </li>
         </ul>
     )

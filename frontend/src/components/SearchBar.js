@@ -1,5 +1,5 @@
 // hooks
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 // components
 import QueryList from '../components/QueryList'
@@ -17,6 +17,7 @@ const SearchBar = ({setSearchResult}) => {
     const [cursor, setCursor] = useState(0)
     // set matching category items
     const [matchingCategoryItems, setMatchingCategoryItems] = useState(null)
+    const focus = useRef()
     const [error, setError] = useState(null)
 
     useEffect(() => {
@@ -26,21 +27,24 @@ const SearchBar = ({setSearchResult}) => {
             setCategoryItems(data.results)
         }
         getCategoryItems()
+        focus.current.focus()
 
         const getDropdownItems = () => {
             if (search.length === 0) {
                 setMatchingCategoryItems(null)
                 setCursor(0)
+                document.querySelector('.search-list').style.display = 'none'
             }
             if (search.length > 0) {
                 setMatchingCategoryItems(categoryItems.filter(item => {
                     return item.index.startsWith(search)
                 }))
+                document.querySelector('.search-list').style.display = 'block'
             }
         }
         getDropdownItems()
 
-    }, [category, search, categoryItems])
+    }, [category, search, categoryItems, focus])
 
     const handleFocus = (e) => {
         setSearchIsActive(true)
@@ -106,6 +110,7 @@ const SearchBar = ({setSearchResult}) => {
                         onBlur={handleBlur}
                         onKeyDown={handleKeyDown}
                         value={search}
+                        ref={focus}
                     />
                 <div className='icon-container'>
                     <div className='icon'><span className="material-symbols-outlined">keyboard_arrow_up</span><span>Go Up</span></div>
@@ -115,7 +120,14 @@ const SearchBar = ({setSearchResult}) => {
             </div>
             <ul className="search-list">
             {matchingCategoryItems && matchingCategoryItems.slice(0,5).map((item, index) => (
-                    <li className={cursor === index ? 'item-focus' : ''} key={index} onClick={handleClick} value={item.index}>{item.index}</li>
+                    <li
+                        className={cursor === index ? 'item-focus' : ''}
+                        key={index}
+                        onClick={handleClick}
+                        onMouseOverCapture={(e) => {setCursor(index)}}
+                        value={item.index}>
+                            {item.index}
+                    </li>
             ))}
         </ul>
         </form>

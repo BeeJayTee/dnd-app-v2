@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import SearchBar from '../components/SearchBar'
 import DisplayContent from '../components/DisplayContent'
@@ -7,9 +7,6 @@ import '../styles/home.css'
 const Home = () => {
      const [searchResult, setSearchResult] = useState({})
 
-     useEffect(() => {
-        console.log(searchResult)
-     }, [searchResult])
 
     return (
         <div className="home">
