@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&family=Source+Code+Pro:wght@300&display=swap');
 
 :root {
     --main: rgb(45, 38, 92);
@@ -58,13 +58,31 @@
 }
 
 .search-bar input {
-    padding: 6px 9px;
+    padding: 6px 9px 0;
     border: none;
     border-bottom: 1px solid var(--main);
     background: none;
     outline: none;
     margin-right: 15px;
     font-size: 1.25rem;
+    height: 45px;
+}
+
+.input-container {
+    display: flex;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    column-gap: 5px;
+}
+
+.icon-container span {
+    display: block;
+    font-size: .85rem;
+    font-family: 'Source Code Pro' sans-serif;
 }
 
 .search-bar button {
@@ -88,13 +106,13 @@
     padding: 5px 10px;
 }
 
-.search-list a:hover, .search-list a:focus {
+.search-list a:hover {
     background: var(--main);
     color: white;
 }
 
-.search-list .focus {
-    background: blue;
+.search-list .item-focus {
+    background: var(--light-gray);
 }
 
 /* Display Spell */

@@ -16,7 +16,7 @@ const SearchBar = ({setSearchResult}) => {
     // set cursor state for choosing item using arrow keys
     const [cursor, setCursor] = useState(0)
     // set matching category items
-    const [matchingCategoryItems, setMatchingCategoryItems] = useState([])
+    const [matchingCategoryItems, setMatchingCategoryItems] = useState(null)
     const [error, setError] = useState(null)
 
     useEffect(() => {
@@ -26,7 +26,21 @@ const SearchBar = ({setSearchResult}) => {
             setCategoryItems(data.results)
         }
         getCategoryItems()
-    }, [category])
+
+        const getDropdownItems = () => {
+            if (search.length === 0) {
+                setMatchingCategoryItems(null)
+                setCursor(0)
+            }
+            if (search.length > 0) {
+                setMatchingCategoryItems(categoryItems.filter(item => {
+                    return item.index.startsWith(search)
+                }))
+            }
+        }
+        getDropdownItems()
+
+    }, [category, search, categoryItems])
 
     const handleFocus = (e) => {
         setSearchIsActive(true)
@@ -38,11 +52,6 @@ const SearchBar = ({setSearchResult}) => {
 
     const handleChange = (e) => {
         setSearch(e.target.value)
-        if (search.length > 0) {
-            setMatchingCategoryItems(categoryItems.filter(item => {
-                return item.index.startsWith(search)
-            }))
-        }
     }
 
     const handleSubmit = async (e, searchClick=null) => {
@@ -50,16 +59,18 @@ const SearchBar = ({setSearchResult}) => {
         if (searchClick) {
             const response = await fetch(`https://www.dnd5eapi.co/api/${category}/${searchClick}`)
             const data = await response.json()
+            setError(null)
             return setSearchResult({category: category, data: data})
         }
-
-        const response = await fetch(`https://www.dnd5eapi.co/api/${category}/${search}`)
+        const searchItem = matchingCategoryItems[cursor].index
+        const response = await fetch(`https://www.dnd5eapi.co/api/${category}/${searchItem}`)
         if (!response.ok) {
             return setError('does not match')
         }
         if (response.ok) {
             const data = await response.json()
             setSearch('')
+            setError(null)
             return setSearchResult({category: category, data: data})
         }
     }
@@ -71,27 +82,40 @@ const SearchBar = ({setSearchResult}) => {
     }
 
     const handleKeyDown = (e) => {
-        console.log(e.key)
+        if (searchIsActive && e.key === 'ArrowDown' && cursor < matchingCategoryItems.length - 1) {
+            setCursor(cursor + 1)
+        } else if (searchIsActive && e.key === 'ArrowUp' && cursor > 0) {
+            setCursor(cursor - 1)
+            e.preventDefault()
+        }
     }
+
 
     return (
         <div className="search-bar">
             <QueryList setCategory={setCategory}/>
             {error && <span>{error}</span>}
             <form onSubmit={handleSubmit}>
-                <input
-                    autoFocus
-                    type="text"
-                    onChange={handleChange}
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
-                    onKeyDown={handleKeyDown}
-                    value={search}
-            />
-            <button><span className="material-symbols-outlined">search</span></button>
+                <div className="input-container">
+                    <input
+                        autoFocus
+                        placeholder='enter to submit'
+                        type="text"
+                        onChange={handleChange}
+                        onFocus={handleFocus}
+                        onBlur={handleBlur}
+                        onKeyDown={handleKeyDown}
+                        value={search}
+                    />
+                <div className='icon-container'>
+                    <div className='icon'><span className="material-symbols-outlined">keyboard_arrow_up</span><span>Go Up</span></div>
+                    <div className='icon'><span className="material-symbols-outlined">keyboard_arrow_down</span><span>Go Down</span></div>
+                    <div className='icon'><span className="material-symbols-outlined">login</span><span>Enter</span></div>
+                </div>
+            </div>
             <ul className="search-list">
             {matchingCategoryItems && matchingCategoryItems.slice(0,5).map((item, index) => (
-                    <li key={index} onClick={handleClick} value={item.index}>{item.index}</li>
+                    <li className={cursor === index ? 'item-focus' : ''} key={index} onClick={handleClick} value={item.index}>{item.index}</li>
             ))}
         </ul>
         </form>
